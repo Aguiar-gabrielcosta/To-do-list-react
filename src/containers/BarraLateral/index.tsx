@@ -1,7 +1,7 @@
-import { FiltroCard } from '../../components/FiltroCard'
+import FiltroCard from '../../components/FiltroCard'
 import * as S from './styles'
 
-export const Barralateral = () => {
+const Barralateral = () => {
   return (
     <S.Aside>
       <div>
@@ -18,3 +18,5 @@ export const Barralateral = () => {
     </S.Aside>
   )
 }
+
+export default Barralateral
