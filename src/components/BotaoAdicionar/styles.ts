@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import cores from '../../styles/cores'
 
 export const Circulo = styled(Link)`
   height: 64px;
   width: 64px;
   border-radius: 50%;
-  background-color: #44bd32;
+  background-color: ${cores.verde};
   color: #fff;
   position: fixed;
   bottom: 40px;
