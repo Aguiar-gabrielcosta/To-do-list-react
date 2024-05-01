@@ -28,6 +28,13 @@ const initialState: TarefasState = {
       prioridade: enums.Prioridade.URGENTE,
       status: enums.Status.PENDENTE,
       titulo: 'Estudar React'
+    },
+    {
+      id: 4,
+      descricao: 'praticar em landing page',
+      prioridade: enums.Prioridade.NORMAL,
+      status: enums.Status.PENDENTE,
+      titulo: 'Estudar Bootstrap'
     }
   ]
 }
