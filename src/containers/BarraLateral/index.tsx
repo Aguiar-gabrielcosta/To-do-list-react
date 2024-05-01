@@ -4,6 +4,7 @@ import { alteraTermo } from '../../store/reducers/filtro'
 import FiltroCard from '../../components/FiltroCard'
 import * as S from './styles'
 import * as enums from '../../utils/enums/Tarefa'
+import { Campo } from '../../styles'
 
 const Barralateral = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const Barralateral = () => {
   return (
     <S.Aside>
       <div>
-        <S.Campo
+        <Campo
           type="text"
           placeholder="Buscar"
           value={termo}
