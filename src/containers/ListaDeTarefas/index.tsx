@@ -1,25 +1,60 @@
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import Tarefa from '../../components/Tarefa'
-import { Container } from './styles'
+import { Container, Resultado } from './styles'
 
 const ListaDetarefas = () => {
   const { itens } = useSelector((state: RootReducer) => state.tarefas)
-  const { termo } = useSelector((state: RootReducer) => state.filtro)
+  const { termo, criterio, valor } = useSelector(
+    (state: RootReducer) => state.filtro
+  )
 
   const filtraTarefas = () => {
-    return itens.filter(
-      (item) => item.titulo.toLowerCase().search(termo.toLowerCase()) >= 0
-    )
+    let tarefasFiltradas = itens
+
+    if (termo !== undefined) {
+      tarefasFiltradas = tarefasFiltradas.filter(
+        (item) => item.titulo.toLowerCase().search(termo.toLowerCase()) >= 0
+      )
+    }
+
+    if (criterio === 'prioridade') {
+      tarefasFiltradas = tarefasFiltradas.filter(
+        (item) => item.prioridade === valor
+      )
+    }
+
+    if (criterio === 'status') {
+      tarefasFiltradas = tarefasFiltradas.filter(
+        (item) => item.status === valor
+      )
+    }
+
+    return tarefasFiltradas
   }
+
+  const exibeResultado = (qtdTarefas: number) => {
+    let mensagem = ''
+    const complemento =
+      termo !== undefined && termo.length > 0 ? `e "${termo}"` : ''
+
+    if (criterio === 'todas') {
+      mensagem = `${qtdTarefas} tarefa(s) encontrada(s) como: todas `
+    } else {
+      mensagem = `${qtdTarefas} tarefa(s) encontrada(s) como: "${`${criterio}: ${valor}`}" `
+    }
+
+    return mensagem + complemento
+  }
+
+  const tarefas = filtraTarefas()
+  const mensagem = exibeResultado(tarefas.length)
 
   return (
     <Container>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&quot; e &quot;{termo}&quot;;
-      </p>
+      <Resultado>{mensagem}</Resultado>
       <ul>
-        {filtraTarefas().map((t) => (
+        {tarefas.map((t) => (
           <li key={t.id}>
             <Tarefa
               titulo={t.titulo}
