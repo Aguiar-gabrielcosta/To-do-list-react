@@ -1,11 +1,22 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { alteraTermo } from '../../store/reducers/filtro'
 import FiltroCard from '../../components/FiltroCard'
 import * as S from './styles'
 
 const Barralateral = () => {
+  const dispatch = useDispatch()
+  const { termo } = useSelector((state: RootReducer) => state.filtro)
+
   return (
     <S.Aside>
       <div>
-        <S.Campo type="text" placeholder="Buscar" />
+        <S.Campo
+          type="text"
+          placeholder="Buscar"
+          value={termo}
+          onChange={(evento) => dispatch(alteraTermo(evento.target.value))}
+        />
         <S.Filtros>
           <FiltroCard contador={3} legenda="pedentes" />
           <FiltroCard contador={3} legenda="concluídas" />
